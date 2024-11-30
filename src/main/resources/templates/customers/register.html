@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Cafe Management System</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{nav :: nav}"></div>
+<section class="container my-4 w-50">
+	<h1>Реєстрація клієнта</h1>
+	<form action="/customers/register" method="POST" th:object="${customer}" >
+		<div class="mb-3">
+			<label for="name" class="form-label mb-1">Ім'я</label>
+			<input type="text" class="form-control" id="name" th:field="${customer.name}" required>
+		</div>
+		<div class="mb-3">
+			<label for="phoneNumber" class="form-label mb-1">Телефон</label>
+			<input type="text" class="form-control" id="phoneNumber" th:field="${customer.phoneNumber}" maxlength="10" required>
+		</div>
+		<div class="mb-3">
+			<label for="email" class="form-label mb-1">Електронна пошта</label>
+			<input type="email" class="form-control" id="email" th:field="${customer.email}" required>
+		</div>
+    <button type="submit" class="btn btn-primary">Зареєструвати</button>
+	</form>
+</section>
+</body>
+</html>
