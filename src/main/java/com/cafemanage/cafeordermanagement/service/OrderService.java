@@ -34,9 +34,10 @@ public class OrderService {
     Customer customer = customerRepository.findById(orderDto.getCustomerId())
         .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-    List<Dish> dishes = orderDto.getDish().stream()
-        .map(dishDto -> dishRepository.findById(dishDto.getId())
-            .orElseThrow(() -> new RuntimeException("Dish not found")))
+    List<Dish> dishes = orderDto.getDishIds().stream()
+        .map(dishId -> dishRepository.findById(dishId)
+            .filter(Dish::getAvailable)
+            .orElseThrow(() -> new RuntimeException("Dish not found or not available")))
         .collect(Collectors.toList());
 
     Double totalPrice = dishes.stream()
@@ -45,7 +46,7 @@ public class OrderService {
 
     orderDto.setTotalPrice(totalPrice);
     orderDto.setOrderTime(LocalDateTime.now());
-    orderDto.setStatus(Order.OrderStatus.valueOf(Order.OrderStatus.PENDING.name()));
+    orderDto.setOriginalStatus(Order.OrderStatus.PENDING.name());
 
     Order order = orderMapper.toEntity(orderDto, customer, dishes);
     Order savedOrder = orderRepository.save(order);
@@ -65,12 +66,25 @@ public class OrderService {
     return orderMapper.toDto(order);
   }
 
-  public List<OrderDto> getOrdersByCustomer(Long customerId){
+  public List<OrderDto> getOrdersByCustomer(Long customerId) {
     Customer customer = customerRepository.findById(customerId)
         .orElseThrow(() -> new RuntimeException("Customer not found"));
 
     return orderRepository.findByCustomer(customer).stream()
         .map(orderMapper::toDto)
         .collect(Collectors.toList());
+  }
+
+  public void updateOrderStatus(Long orderId, Order.OrderStatus status) {
+    Order order = orderRepository.findById(orderId)
+        .orElseThrow(() -> new RuntimeException("Order not found"));
+    order.setStatus(status);
+    orderRepository.save(order);
+  }
+
+  public void deleteOrder(Long id) {
+    Order order = orderRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Order not found"));
+    orderRepository.delete(order);
   }
 }

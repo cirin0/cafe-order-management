@@ -34,7 +34,7 @@ public class DishWebController {
   }
 
   @GetMapping
-  public String listDishes(Model model){
+  public String listDishes(Model model) {
     model.addAttribute("dishes", dishService.getAllDishes());
     return "dishes/list";
   }
@@ -68,7 +68,7 @@ public class DishWebController {
   }
 
   @PostMapping("/{id}")
-  public String editDish(@PathVariable Long id, @ModelAttribute ("dish") DishDto dishDto) {
+  public String editDish(@PathVariable Long id, @ModelAttribute("dish") DishDto dishDto) {
     dishDto.setOriginalCategory(
         Arrays.stream(Dish.Category.values())
             .filter(c -> EnumTranslator.translate("DISH_CATEGORY", c.name()).equals(dishDto.getCategory()))

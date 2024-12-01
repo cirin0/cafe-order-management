@@ -1,6 +1,6 @@
 package com.cafemanage.cafeordermanagement.dto;
 
-import lombok.*;
+import lombok.Data;
 
 @Data
 public class CustomerDto {

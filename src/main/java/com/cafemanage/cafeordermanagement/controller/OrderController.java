@@ -1,8 +1,8 @@
 package com.cafemanage.cafeordermanagement.controller;
 
 import com.cafemanage.cafeordermanagement.dto.OrderDto;
-import com.cafemanage.cafeordermanagement.service.CustomerService;
 import com.cafemanage.cafeordermanagement.service.OrderService;
+import com.cafemanage.cafeordermanagement.service.OrderScheduler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +13,11 @@ import java.util.List;
 public class OrderController {
 
   private final OrderService orderService;
-  private final CustomerService customerService;
+  private final OrderScheduler orderScheduler;
 
-  public OrderController(OrderService orderService, CustomerService customerService) {
+  public OrderController(OrderService orderService, OrderScheduler orderScheduler) {
     this.orderService = orderService;
-    this.customerService = customerService;
+    this.orderScheduler = orderScheduler;
   }
 
   @GetMapping
@@ -37,6 +37,14 @@ public class OrderController {
 
   @PostMapping
   public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto) {
-    return ResponseEntity.ok(orderService.createOrder(orderDto));
+    OrderDto createdOrder = orderService.createOrder(orderDto);
+    orderScheduler.statusUpdate(createdOrder.getId());
+    return ResponseEntity.ok(createdOrder);
+  }
+
+  @DeleteMapping("{id}")
+  public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
+    orderService.deleteOrder(id);
+    return ResponseEntity.noContent().build();
   }
 }

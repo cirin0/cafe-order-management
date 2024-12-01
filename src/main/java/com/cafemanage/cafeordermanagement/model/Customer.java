@@ -1,7 +1,7 @@
 package com.cafemanage.cafeordermanagement.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 @Entity
 @Data

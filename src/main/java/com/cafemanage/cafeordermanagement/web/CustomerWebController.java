@@ -15,7 +15,7 @@ public class CustomerWebController {
   private final CustomerService customerService;
 
   @GetMapping
-  public String listCustomers(Model model){
+  public String listCustomers(Model model) {
     model.addAttribute("customers", customerService.getAllCustomers());
     return "customers/list";
   }

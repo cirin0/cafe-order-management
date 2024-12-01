@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerMapper {
-  public CustomerDto toDto (Customer customer) {
+  public CustomerDto toDto(Customer customer) {
     CustomerDto customerDto = new CustomerDto();
     customerDto.setId(customer.getId());
     customerDto.setName(customer.getName());

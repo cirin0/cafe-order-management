@@ -22,7 +22,7 @@ public class Dish {
   @Enumerated(EnumType.STRING)
   private Category category;
 
-  public enum Category  {
+  public enum Category {
     APPETIZER,
     MAIN_COURSE,
     DESSERT,
