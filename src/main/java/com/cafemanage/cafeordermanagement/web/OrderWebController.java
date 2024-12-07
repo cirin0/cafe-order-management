@@ -29,8 +29,6 @@ public class OrderWebController {
   @GetMapping
   public String listOrders(Model model) {
     model.addAttribute("orders", orderService.getAllOrders());
-    model.addAttribute("customers",customerService.getAllCustomers());
-
     List<String> statuses = Arrays.stream(Order.OrderStatus.values())
         .map(status -> EnumTranslator.translate("ORDER_STATUS", status.name()))
         .toList();

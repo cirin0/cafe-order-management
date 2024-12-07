@@ -7,25 +7,28 @@
 
 ## Функціональні вимоги
 1. **Управління меню**:
-  - Додавання нових страв.
-  - Перегляд доступного меню.
-  - Оновлення інформації про страву (назва, ціна, опис, наявність).
-  - Видалення страв із меню.
+   - Додавання нових страв.
+   - Перегляд доступного меню.
+   - Оновлення інформації про страву (назва, ціна, опис, наявність).
+   - Видалення страв із меню.
+   
 
 2. **Управління замовленнями**:
-  - Створення нового замовлення.
-  - Перегляд усіх замовлень.
-  - Перегляд замовлень конкретного клієнта.
-  - Оновлення статусу замовлення (Очікується, "Готується", "Готово", "Виконано", "Скасовано").
-  - Видалення замовлень.
+   - Створення нового замовлення.
+   - Перегляд усіх замовлень.
+   - Перегляд замовлень конкретного клієнта.
+   - Оновлення статусу замовлення (Очікується, "Готується", "Готово", "Виконано", "Скасовано").
+   - Видалення замовлень.
+   
 
 3. **Управління клієнтами**:
-  - Додавання клієнтів (ім'я, контактний номер, email).
-  - Перегляд клієнта за ім'ям.
-  - Перегляд клієнта за ID.
-  - Перегляд усіх клієнтів.
-  - Отримання інформації про конкретного клієнта та його замовлення.
-  - Видалення клієнтів.
+   - Додавання клієнтів (ім'я, контактний номер, email).
+   - Перегляд клієнта за ім'ям.
+   - Перегляд клієнта за ID.
+   - Перегляд усіх клієнтів.
+   - Отримання інформації про конкретного клієнта та його замовлення.
+   - Видалення клієнтів.
+   
 
 ---
 
@@ -33,22 +36,19 @@
 
 #### Customer Endpoints
 
-- **Get All Customers**
+- **Отримати список усіх клієнтів**
     - **URL:** `/api/customers`
     - **Method:** `GET`
-    - **Description:** Retrieves a list of all customers
-
-- **Get Customer by I'd**
+    - 
+- **Отримати клієнта за його ідентифікатором**
     - **URL:** `/api/customers/{id}`
     - **Method:** `GET`
-    - **Description:** Retrieves a customer by their id
     - **Path Parameters:**
-        - `id` (long): The name of the customer
+        - `id` (long): Ім'я клієнта
 
-- **Add Customer**
+- **Додає нового клієнта**
     - **URL:** `/api/customers`
     - **Method:** `POST`
-    - **Description:** Adds a new customer
     - **Request Body:**
       ```json
       {
@@ -58,43 +58,38 @@
       }
       ```
 
-- **Update Customer**
+- **Оновити наявного клієнта за його іменем**
     - **URL:** `/api/customers/{name}`
     - **Method:** `PUT`
-    - **Description:** Updates an existing customer by their name
     - **Path Parameters:**
-        - `name` (string): The name of the customer
+        - `name` (string): Ім'я замовника
     - **Request Body:**
       ```json
       {
         "email": "new.email@example.com"
       }
       ```
-- **Delete Customer**
+- **Видалити клієнта за його ідентифікатором**
     - **URL:** `/api/customers/{id}`
     - **Method:** `DELETE`
-    - **Description:** Deletes a customer by their id
     - **Path Parameters:**
-        - `id` (long): The id of the customer
+        - `id` (long): Ідентифікатор клієнта
 
 #### Dish Endpoints
 
-- **Get All Dishes**
+- **Отримати список усіх страв**
     - **URL:** `/api/dishes`
     - **Method:** `GET`
-    - **Description:** Retrieves a list of all dishes
 
-- **Get Dish by ID**
+- **Отримати страву за її ідентифікатором**
     - **URL:** `/api/dishes/{id}`
     - **Method:** `GET`
-    - **Description:** Retrieves a dish by its ID
     - **Path Parameters:**
-        - `id` (long): The ID of the dish
+        - `id` (long): Ідентифікатор страви
 
-- **Create Dish**
+- **Створити нову страву**
     - **URL:** `/api/dishes`
     - **Method:** `POST`
-    - **Description:** Creates a new dish
     - **Request Body:**
       ```json
       {
@@ -106,12 +101,11 @@
       }
       ```
 
-- **Update Dish**
+- **Оновити наявну страву за її ідентифікатором**
     - **URL:** `/api/dishes/{id}`
     - **Method:** `PUT`
-    - **Description:** Updates an existing dish by its ID
     - **Path Parameters:**
-        - `id` (long): The ID of the dish
+        - `id` (long): Ідентифікатор страви
     - **Request Body:**
       ```json
       {
@@ -120,38 +114,33 @@
       }
       ```
 
-- **Delete Dish**
+- **Видалити страви за її ідентифікатором**
     - **URL:** `/api/dishes/{id}`
     - **Method:** `DELETE`
-    - **Description:** Deletes a dish by its ID
     - **Path Parameters:**
-        - `id` (long): The ID of the dish
+        - `id` (long): Ідентифікатор страви
 
 #### Order Endpoints
 
-- **Get All Orders**
+- **Отримати список усіх замовлень**
     - **URL:** `/api/orders`
     - **Method:** `GET`
-    - **Description:** Retrieves a list of all orders
 
-- **Get Order by ID**
+- **Отримати замовлення за його ідентифікатором**
     - **URL:** `/api/orders/{id}`
     - **Method:** `GET`
-    - **Description:** Retrieves an order by its ID
     - **Path Parameters:**
-        - `id` (integer): The ID of the order
+        - `id` (integer): Ідентифікатор замовлення
 
-- **Get Orders by Customer ID**
+- **Отримати замовлення за його ідентифікатором**
     - **URL:** `/api/orders/customer/{id}`
     - **Method:** `GET`
-    - **Description:** Retrieves a list of orders by customer ID
     - **Path Parameters:**
-        - `id` (integer): The ID of the customer
+        - `id` (integer): Ідентифікатор замовлення
 
-- **Create Order**
+- **Створити нове замовлення**
     - **URL:** `/api/orders`
     - **Method:** `POST`
-    - **Description:** Creates a new order
     - **Request Body:**
       ```json
       {
@@ -160,15 +149,14 @@
       }
       ```
 
-- **Delete Order**
+- **Видалити замовлення за його ідентифікатором**
     - **URL:** `/api/orders/{id}`
     - **Method:** `DELETE`
-    - **Description:** Deletes an order by its ID
     - **Path Parameters:**
-        - `id` (integer): The ID of the order
+        - `id` (integer): Ідентифікатор замовлення
 
 ---
 ## ER Diagram
 
-![ER-diagram](https://github.com/{{name}}/cafe-order-management/blob/main/Er.png)
+![ER-diagram](https://github.com/cirin0/cafe-order-management/blob/main/Er.png "ER Diagram")
 

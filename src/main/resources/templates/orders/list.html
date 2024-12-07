@@ -25,8 +25,8 @@
 		<tbody>
 		<tr th:each="order : ${orders}" th:id="${order.id}">
 			<td th:text="${order.id}"></td>
-			<td th:each="customer : ${customers}">
-				<a th:href="@{/orders/customer/{id}(id=${customer.id})}" th:text="${order.customerName}"></a>
+			<td>
+				<a th:href="@{/orders/customer/{id}(id=${order.customerId})}" th:text="${order.customerName}"></a>
 			</td>
 			<td th:text="${#temporals.format(order.orderTime, 'dd.MM.yyyy HH:mm')}"></td>
 			<td th:text="${order.status}"></td>
