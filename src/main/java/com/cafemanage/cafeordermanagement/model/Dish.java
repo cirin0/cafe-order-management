@@ -14,9 +14,14 @@ public class Dish {
 
   @Column(nullable = false)
   private String name;
+
   @Column(nullable = false)
   private Double price;
+
+  private String image;
+
   private String description;
+
   private Boolean available;
 
   @Enumerated(EnumType.STRING)

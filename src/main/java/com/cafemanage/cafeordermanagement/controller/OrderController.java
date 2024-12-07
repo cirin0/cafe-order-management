@@ -1,11 +1,14 @@
 package com.cafemanage.cafeordermanagement.controller;
 
 import com.cafemanage.cafeordermanagement.dto.OrderDto;
+import com.cafemanage.cafeordermanagement.model.Order;
 import com.cafemanage.cafeordermanagement.service.OrderService;
 import com.cafemanage.cafeordermanagement.service.OrderScheduler;
+import com.cafemanage.cafeordermanagement.utils.EnumTranslator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -40,6 +43,22 @@ public class OrderController {
     OrderDto createdOrder = orderService.createOrder(orderDto);
     orderScheduler.statusUpdate(createdOrder.getId());
     return ResponseEntity.ok(createdOrder);
+  }
+
+  @PutMapping("{id}/status")
+  public ResponseEntity<Void> updateOrderStatus(@PathVariable Long id, @RequestParam("status") String status) {
+    String originalStatus = Arrays.stream(Order.OrderStatus.values())
+        .filter(s -> EnumTranslator.translate("ORDER_STATUS", s.name()).equals(status))
+        .findFirst()
+        .map(Order.OrderStatus::name)
+        .orElseThrow(() -> new IllegalArgumentException("Invalid status: " + status));
+
+    Order.OrderStatus orderStatus = Order.OrderStatus.valueOf(originalStatus);
+    orderService.updateOrderStatus(id, orderStatus);
+    if (originalStatus.equals(Order.OrderStatus.CANCELED.name())){
+      orderScheduler.deleteOrder(id);
+    }
+    return ResponseEntity.ok().build();
   }
 
   @DeleteMapping("{id}")

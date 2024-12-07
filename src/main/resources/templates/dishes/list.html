@@ -17,7 +17,7 @@
 			<th>Ціна</th>
 			<th>Категорія</th>
 			<th>Наявність</th>
-			<th colspan="2">Дія</th>
+			<th colspan="3">Дія</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -26,6 +26,9 @@
 			<td th:text="${dish.price}"></td>
 			<td th:text="${dish.category}"></td>
 			<td th:text="${dish.available} ? 'Так' : 'Ні'"></td>
+			<td>
+				<a th:href="@{/dishes/{id}(id=${dish.id})}" class="btn btn-info">Деталі</a>
+			</td>
 			<td>
 				<a th:href="@{/dishes/{id}/edit(id=${dish.id})}" class="btn btn-primary">Редагувати</a>
 			</td>

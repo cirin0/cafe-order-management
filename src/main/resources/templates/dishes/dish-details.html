@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Cafe Management System</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{nav :: nav}"></div>
+<section class="container my-4 ">
+	<h1>Деталі страви</h1>
+	<div class="card w-75 mx-auto">
+		<div class="card-header">
+			<h5 class="card-title" th:text="${dish.name}"></h5>
+		</div>
+		<div class="card-body">
+			<img th:src="${dish.image}" alt="Dish image" class="mb-3" style="
+					 object-fit: contain;
+           height: 230px;
+           width: 100%;">
+			<p class="card-text"><strong>Опис:</strong> <span th:text="${dish.description}"></span></p>
+			<p class="card-text"><strong>Ціна:</strong> <span th:text="${dish.price} + ' грн.'"></span></p>
+			<p class="card-text"><strong>Категорія:</strong> <span th:text="${dish.category}"></span></p>
+			<p class="card-text"><strong>Наявність:</strong> <span
+					th:text="${dish.available} ? 'Доступно' : 'Не доступно'"></span></p>
+			<div class="d-flex gap-1">
+				<a href="/dishes" class="btn btn-secondary">Назад</a>
+				<a th:href="@{/dishes/{id}/edit(id=${dish.id})}" class="btn btn-primary">Редагувати</a>
+				<a th:href="@{/dishes/{id}/delete(id=${dish.id})}" class="btn btn-danger"
+					 onclick="return confirm('Ви впевнені, що хочете видалити цю страву?')">Видалити</a>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

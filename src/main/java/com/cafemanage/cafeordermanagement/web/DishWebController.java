@@ -39,6 +39,13 @@ public class DishWebController {
     return "dishes/list";
   }
 
+  @GetMapping("/{id}")
+  public String getDishById(@PathVariable Long id, Model model) {
+    DishDto dish = dishService.getDishById(id);
+    model.addAttribute("dish", dish);
+    return "dishes/dish-details";
+  }
+
   @GetMapping("/add")
   public String showAddDishForm(Model model) {
     model.addAttribute("dish", new DishDto());

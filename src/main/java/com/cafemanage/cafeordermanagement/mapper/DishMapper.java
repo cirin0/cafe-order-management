@@ -12,6 +12,7 @@ public class DishMapper {
     dishDto.setId(dish.getId());
     dishDto.setName(dish.getName());
     dishDto.setPrice(dish.getPrice());
+    dishDto.setImage(dish.getImage());
     dishDto.setDescription(dish.getDescription());
     dishDto.setAvailable(dish.getAvailable());
     dishDto.setCategory(EnumTranslator.translate("DISH_CATEGORY", dish.getCategory().name()));
@@ -30,6 +31,7 @@ public class DishMapper {
     dish.setId(dishDto.getId());
     dish.setName(dishDto.getName());
     dish.setPrice(dishDto.getPrice());
+    dish.setImage(dishDto.getImage());
     dish.setDescription(dishDto.getDescription());
     dish.setAvailable(dishDto.getAvailable());
     dish.setCategory(category);
@@ -42,6 +44,9 @@ public class DishMapper {
     }
     if (dishDto.getPrice() != null) {
       dish.setPrice(dishDto.getPrice());
+    }
+    if (dishDto.getImage() != null) {
+      dish.setImage(dishDto.getImage());
     }
     if (dishDto.getDescription() != null) {
       dish.setDescription(dishDto.getDescription());

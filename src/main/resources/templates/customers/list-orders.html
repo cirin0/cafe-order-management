@@ -18,7 +18,6 @@
 			<th>Статус</th>
 			<th>Страви</th>
 			<th>Загальна ціна</th>
-			<th>Дія</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -34,9 +33,6 @@
 				</ul>
 			</td>
 			<td th:text="${order.totalPrice}"></td>
-			<td>
-				<a th:href="@{/orders/{id}/details(id=${order.id})}" class="btn btn-info">Деталі</a>
-			</td>
 		</tr>
 		</tbody>
 	</table>

@@ -25,7 +25,9 @@
 		<tbody>
 		<tr th:each="order : ${orders}" th:id="${order.id}">
 			<td th:text="${order.id}"></td>
-			<td th:text="${order.customerName}"></td>
+			<td th:each="customer : ${customers}">
+				<a th:href="@{/orders/customer/{id}(id=${customer.id})}" th:text="${order.customerName}"></a>
+			</td>
 			<td th:text="${#temporals.format(order.orderTime, 'dd.MM.yyyy HH:mm')}"></td>
 			<td th:text="${order.status}"></td>
 			<td>
@@ -40,8 +42,14 @@
 			<td>
 				<ul class="list-group">
 					<li class="list-group-item d-flex justify-content-between align-items-center" th:each="dish : ${order.dish}">
-						<span th:text="${dish.name}"></span>
-						<span class="badge bg-primary rounded-pill" th:text="${dish.price} + ' грн.'"></span>
+						<a th:href="@{/dishes/{id}(id=${dish.id})}"
+							 class="d-flex justify-content-between align-items-center w-100 text-decoration-none text-dark"
+							 style="transition: transform 0.2s;"
+							 onmouseover="this.style.transform='scale(1.05)';"
+							 onmouseout="this.style.transform='scale(1)';">
+							<span th:text="${dish.name}"></span>
+							<span class="badge bg-primary rounded-pill" th:text="${dish.price} + ' грн.'"></span>
+						</a>
 					</li>
 				</ul>
 			</td>
