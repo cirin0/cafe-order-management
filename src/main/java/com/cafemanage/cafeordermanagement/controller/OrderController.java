@@ -2,8 +2,8 @@ package com.cafemanage.cafeordermanagement.controller;
 
 import com.cafemanage.cafeordermanagement.dto.OrderDto;
 import com.cafemanage.cafeordermanagement.model.Order;
-import com.cafemanage.cafeordermanagement.service.OrderService;
 import com.cafemanage.cafeordermanagement.service.OrderScheduler;
+import com.cafemanage.cafeordermanagement.service.OrderService;
 import com.cafemanage.cafeordermanagement.utils.EnumTranslator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +55,7 @@ public class OrderController {
 
     Order.OrderStatus orderStatus = Order.OrderStatus.valueOf(originalStatus);
     orderService.updateOrderStatus(id, orderStatus);
-    if (originalStatus.equals(Order.OrderStatus.CANCELED.name())){
+    if (originalStatus.equals(Order.OrderStatus.CANCELED.name())) {
       orderScheduler.deleteOrder(id);
     }
     return ResponseEntity.ok().build();

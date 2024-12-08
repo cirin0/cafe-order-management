@@ -25,7 +25,7 @@
 			<td th:text="${customer.phoneNumber}"></td>
 			<td th:text="${customer.email}"></td>
 			<td>
-				<a th:href="@{/orders/customer/{id}(id=${customer.id})}" class="btn btn-info">Замовлення</a>
+				<a th:href="@{/orders/customer/{id}(id=${customer.id})}" class="btn btn-info">Всі замовлення</a>
 			<td>
 				<a th:href="@{/customers/{name}/edit(name=${customer.name})}" class="btn btn-primary">Редагувати</a>
 			</td>
